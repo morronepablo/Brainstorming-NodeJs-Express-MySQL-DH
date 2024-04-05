@@ -1,0 +1,640 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+:root {
+    --Dark_cyan: hsl(185, 75%, 39%);
+    --Very_dark_desatured_blue: hsl(229, 23%, 23%);
+    --Dark_grayish_blue: hsl(227, 10%, 46%);
+    --Dark_gray: hsl(0, 0%, 59%);
+    --Yellow: #ffc107;
+    --Black_light: #1f2d3d;
+    --Blue_medium: #007bff;
+    --Blue_medium_osc: #0069d9;
+    --White_light: #f8f9fa;
+    --Green_medium: #28a745;
+}
+
+.dataTitle {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 170px;
+}
+
+#profile-user {
+    margin-right: 10px;
+}
+
+/*==================================================
+    Contenedor General
+==================================================*/
+
+main {
+    width: 90%;
+	height: 1000px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*==================================================
+    Contenedor Izquierdo
+==================================================*/
+
+.dataProfile {
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+/*==================================================
+    Card Estadisticas
+==================================================*/
+
+.card-container {
+    height: 380px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative; 
+    box-shadow: 1px 1px 2px #999;
+    -webkit-box-shadow: 1px 1px 2px #999;
+    -moz-box-shadow: 1px 1px 2px #999;
+}
+
+.bubbles {
+    background: url(/img/users/cards/bg-pattern-card.svg);
+    height: 140px;
+}
+.photo {
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    top: 87px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border: 4px solid white;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px #999;
+    -webkit-box-shadow: 2px 2px 5px #999;
+    -moz-box-shadow: 2px 2px 5px #999;
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.personal-data-container {
+    background-color: white;
+    height: 150px;
+    padding: 75px;
+    text-align: center;
+}
+
+.name {
+    font-weight: 700;
+    color: var(--Very_dark_desatured_blue);
+}
+
+.age, .city {
+    color: var(--Dark_gray);
+}
+
+.city {
+    margin-top: 10px;
+    font-size: 0.8em;
+}
+
+.stats-container {
+    background-color: var(--White_light);
+    border-top: 1px solid var(--Dark_gray);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 90px;
+}
+
+.statistics {
+    text-align: center;
+}
+
+.quantity {
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--Very_dark_desatured_blue);
+}
+
+.units {
+    font-size: 0.6em;
+    color: var(--Dark_gray);
+    letter-spacing: 2px;
+}
+
+/*==================================================
+    Card Datos Personales
+==================================================*/
+
+.dataProfilePersonal {
+    margin-top: 20px;
+}
+
+.card-container-personal {
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative; 
+    box-shadow: 1px 1px 2px #999;
+    -webkit-box-shadow: 1px 1px 2px #999;
+    -moz-box-shadow: 1px 1px 2px #999;  
+}
+
+.box-personal {
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: var(--Yellow);
+}
+
+.box-personal span {
+    margin-left: 10px;
+    color: var(--Black_light);
+}
+
+.box-personal a {
+    color: var(--Very_dark_desatured_blue);
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.data-name {
+    height: 60px;
+    padding-left: 20px;
+}
+
+.data-name h3{
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.data-information {
+    display: flex;
+    flex-direction: column;
+    font-size: 80%;
+    padding-left: 20px;
+    color: var(--Dark_grayish_blue);
+}
+
+.data-information div {
+    width: 300px;
+    margin-top: 5px;
+}
+
+.data-img i{
+    width: 25px;
+}
+
+.general-personal-box {
+    height: 180px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.data-personal {
+    width: 70%;
+    margin-top: 20px;
+}
+
+.data-image {
+    width: 35%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.data-avatar {
+    height: 60px;
+    width: 60px;
+}
+.data-avatar img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+
+.box-button {
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--White_light);
+    border-radius: 0px 0px 10px 10px;
+}
+
+.box-button button {
+    font-size: 1rem;
+    height: 40px;
+    width: 220px;
+    color: #fff;
+    background-color: var(--Blue_medium);
+    border-color: var(--Blue_medium);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+
+.box-button button:hover {
+    background-color:  var(--Blue_medium_osc);
+}
+
+/*==================================================
+    Dirección de envío
+==================================================*/
+
+.card-container-personal-2 {
+    font-family: 'Source Sans Pro', sans-serif;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative; 
+    margin-top: 20px;
+    box-shadow: 1px 1px 2px #999;
+    -webkit-box-shadow: 1px 1px 2px #999;
+    -moz-box-shadow: 1px 1px 2px #999;  
+}
+
+.box-personal-2 {
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: var(--Green_medium);
+}
+
+.box-personal-2 span {
+    margin-left: 10px;
+    color: var(--Black_light);
+}
+
+.general-personal-box-2 {
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#addres {
+    font-size: 1.25rem; 
+    font-weight: 300; 
+    color: #212529;
+}
+
+.card-address {
+    height: 150px;
+    width: 85%;
+    margin-top: 20px;
+    margin-left: 20px;
+    border-radius: .25rem;
+    border-left: 5px solid #117a8b;;
+    box-shadow: 1px 1px 2px #999;
+    -webkit-box-shadow: 1px 1px 2px #999;
+    -moz-box-shadow: 1px 1px 2px #999; 
+}
+
+.data-information-2 {
+    margin-top: 20px;
+    font-size: 80%;
+    padding-left: 20px;
+    color: var(--Dark_grayish_blue);
+}
+
+/*==================================================
+    Contenedor Derecho
+==================================================*/
+
+.dataHistory {
+    display: none !important;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid rgb(228, 228, 228);
+    box-shadow: 1px 1px 2px #999;
+    -webkit-box-shadow: 1px 1px 2px #999;
+    -moz-box-shadow: 1px 1px 2px #999;
+}
+
+.dataNav {
+    height: 60px;
+    display: flex;
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: 1px solid rgb(228, 228, 228);
+}
+
+.historial {
+    width: 96%;
+    height: 60%;
+    margin: auto;
+}
+
+.historial h4 {
+    background-color: var(--Blue_medium);
+    font-family: "Source Sans Pro";
+    font-weight: normal;
+    color: white;
+    width: 100px;
+    text-align: center;
+    padding: 10px;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.dataFech {
+    height: 60px;
+    display: flex;
+    position: relative;
+}
+
+.dateToday {
+    width: 96%;
+    height: 60%;
+    margin: auto;
+}
+
+.dateToday h4 {
+    background-color: #DC3545;
+    font-family: "Source Sans Pro";
+    font-weight: normal;
+    color: white;
+    width: 22%;
+    padding: 10px;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.dataBar {
+    height: 49px;
+    width: 5px;
+    background-color: #dee2e6;
+    position: absolute;
+    top: 12px;
+    left: 50px;
+    z-index: -1;
+}
+
+.dataMessage {
+    height: 125px;
+    margin-left: 15px;
+    display: flex;
+    position: relative;
+    /* border: 1px solid green; */
+}
+
+.dataLogo {
+    width: 9%;
+    padding: 0 15px;
+    /* border: 1px solid violet; */
+}
+
+.dataLogo div {
+    width: 30px;
+    height: 30px;
+    background-color: var(--Blue_medium);
+    border-radius: 50%;
+    text-align: center;
+    margin: auto;
+}
+
+.dataLogo div i {
+    margin-top: 6px;
+    color: white;
+}
+
+.dataBarMessage {
+    height: 125px;
+    width: 5px;
+    background-color: #dee2e6;
+    position: absolute;
+    top: 0;
+    left: 34px;
+    z-index: -1;
+}
+
+.textheader {
+    height: 40px;
+    width: 95%;
+    background-color: var(--White_light);
+    border-radius: 5px 5px 0px 0px;
+    border: 1px solid rgb(228, 228, 228);
+}
+
+.textheader div {
+    width: 96%;
+    height: 60%;
+    margin: auto;
+}
+
+.textheader div h4 {
+    color: #495057;
+    font-family: "Source Sans Pro";
+    font-weight: bold;
+    padding: 10px;
+    height: 100%;
+
+}
+
+.textBody {
+    height: 70px;
+    width: 95%;
+    background-color: var(--White_light);
+    border: 1px solid rgb(228, 228, 228);
+    border-top: 0px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.textBody div {
+    width: 96%;
+    height: 60%;
+    margin: auto;
+}
+
+.textBody div h4 {
+    color: #495057;
+    font-family: "Source Sans Pro";
+    font-weight: normal;
+    padding: 10px;
+    line-height: 1.3;
+    height: 100%;
+}
+
+.dataText {
+    width: 91%;
+}
+
+
+.form-group select {
+    width: 100%;
+    height: 40px;
+    padding: 7.15px 15px;
+    font-family: var(--fontBody);
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    color: var(--rosado);
+    border: 2px solid var(--rosado);
+}
+.form-group select option {
+    color: var(--rosado);
+}
+.form-group select:focus {
+    outline: none;
+    border: 2px solid var(--rosado);
+    border-top: 3px solid var(--rosado);
+    box-shadow: 0px 0px 10px rgb(100, 100, 100);
+}
+
+.dataUsersMovil {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#acction-text, #acction-text2, #acction-text3, #acction-text4, #acction-text5 {
+    margin-right: 5px;
+}
+
+#dMessage, #dMessage2, #dMessage3, #dMessage4, #dMessage5, #dMessage6 {
+    height: 105px;
+}
+
+#dLogo, #dLogo2, #dLogo3 {
+    background-color: #17a2b8;
+}
+
+#dLogo4 {
+    background-color: #6c757d;
+}
+
+#dBarMessage, #dBarMessage2, #dBarMessage3 {
+    height: 105px;
+}
+
+#tBody, #tBody2, #tBody3, #tBody4 {
+    height: 50px;
+}
+
+#dToday {
+    margin-top: 0;
+}
+
+.btn-delete-user {
+    background-color: rgb(187, 3, 3);
+    width: 100px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+}
+
+
+/*==================================================
+    PUNTOS DE QUIEBRES
+==================================================*/
+
+/*==================================================
+    TABLET
+==================================================*/
+
+@media (min-width: 481px) {
+
+    /* CONTENEDOR GENERAL */
+    main {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    /* CONTENEDOR IZQUIERDO */
+    .dataProfile {
+        width: 98%;
+        font-size: 14px;
+    }
+
+    /* CONTENEDOR DERECHO */
+    .dataHistory {
+        width: 61%;
+    }
+  
+}
+
+@media (min-width: 481px) {
+    .card-address {
+        width: 93%;
+    }
+}
+  
+/*==================================================
+    LAPTOP
+==================================================*/
+
+@media (min-width: 769px) {
+
+    /* CONTENEDOR GENERAL */
+    main {
+        width: 88%;
+    }
+
+    /* CONTENEDOR IZQUIERDO */
+    .dataProfile {
+        width: 30%;
+        font-size: 18px;
+    }
+
+    .card-address {
+        width: 85%;
+    }
+
+    /* CONTENEDOR DERECHO */
+    .dataHistory {
+        display: block !important;
+        width: 69%;
+    }
+
+    .dateToday h4 {
+        width: 29% !important;
+    }
+
+    .dataUsersMovil {
+        display: none;
+    }
+    .deleteUsersMovil {
+        display: none;
+    }
+
+}
+  
+/*==================================================
+    TV
+==================================================*/
+
+@media (min-width: 1300px) {
+
+    /* CONTENEDOR GENERAL */
+    main {
+        width: 82%;
+    }
+
+    .dateToday h4 {
+        width: 24% !important;
+    }
+
+    .card-address {
+        width: 90%;
+    }
+    
+}

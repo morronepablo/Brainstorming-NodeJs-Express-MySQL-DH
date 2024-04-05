@@ -1,0 +1,353 @@
+<!-- <%- include('../partials/head') %>
+
+<%- include('../partials/header') %> -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/efectosBotones.css">
+    <link rel="stylesheet" href="/css/modal.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <%- include('../partials/header.ejs') %>
+
+    <%- include('../partials/scrollUp.ejs') %>
+    <% let zone; %>
+    <% for( let index = 0; index < zoneDatabase.length; index++ ) {
+        if(user.state == zoneDatabase[index].id ) {
+            zone = zoneDatabase[index].name;
+        } 
+     } %>
+
+
+<!-- Ventana modal -->
+<div class="modal" id="modalAdd">
+    <div class="modal-container">
+        <div class="close-modal" onclick="closeModal()">X</div>
+        <div class="container">
+            <div class="header">
+                <h2>CAMBIAR CONTRASEÑA</h2>
+            </div>
+            <form id="form" class="form" action="/users/editPass/<%= user.id %>?_method=PUT" method="post" >
+                <div class="form-control">
+                    <label for="password">Contraseña</label>
+                    <input 
+                        type="password" 
+                        placeholder="Contraseña" 
+                        id="password" 
+                        name="password"
+                        value="<%= locals.oldData ? oldData.password : '' %>"
+                    />
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                    <% if (locals.errors && errors.password) { %>
+                        <div class="text-danger errors-danger">
+                            <%= errors.password.msg %>
+                        </div>
+                    <% } %>
+                </div>
+                <div class="form-control">
+                    <label for="password2">Repetir contraseña</label>
+                    <input 
+                        type="password" 
+                        placeholder="Repetir contraseña" 
+                        id="password2" 
+                        name="password2" 
+                    />
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error message</small>
+                    <% if (locals.errors && errors.password2) { %>
+                        <div class="text-danger errors-danger" >
+                            <%= errors.password2.msg %>
+                        </div>
+                    <% } %>
+                </div>
+                <button type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="dataTitle">
+    <h1 style="font-family: 'Bebas Neue'; font-style: regular; color: var(--rosado);">
+        <i class="fas fa-address-card" id="profile-user"></i> Perfil del usuario
+    </h1>
+</div>
+<main>
+    <div class="dataProfile">
+        <div class="dataProfileStates">
+            <div class="card-container">
+                <div class="bubbles"></div>
+                <div class="photo">
+                    <img src="/img/users/<%= user.avatar %>" alt="Foto Personal">
+                </div>
+                <div class="personal-data-container">
+                    <span class="name"><%= user.fullName %></span>
+                    <!-- <span class="age">26</span> -->
+                    <div class="city"><%= user.city %></div>
+                </div>
+                <div class="stats-container">
+                    <div class="statistics">
+                        <div class="quantity">80</div>
+                        <div class="units">Seguidores</div>
+                    </div>
+                    <div class="statistics">
+                        <div class="quantity">803</div>
+                        <div class="units">Compras</div>
+                    </div>
+                    <div class="statistics">
+                        <div class="quantity"><%= totalProducts %></div>
+                        <div class="units">Productos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dataProfilePersonal">
+            <div class="card-container-personal">
+                <div class="box-personal">
+                    <span class="personal-title">Mis datos personales</span>
+                    <a href="/users/editUser/<%= user.id %>"><i class="fas fa-pencil-alt"></i></a>
+                </div>
+                <div class="general-personal-box">
+                    <div class="data-personal">
+                        <div class="data-name">
+                            <h3><%= user.fullName %></h3>
+                        </div>
+                        <div class="data-information">
+                            <div>
+                                <span class="data-img"><i class="fas fa-address-card"></i></span><span>DNI: <%= user.dni_cuit %></span><br>
+                            </div>
+                            <div>
+                                <span class="data-img" style="margin-top: 10px;"><i class="fas fa-at"></i></span><span>Email: <%= user.email %></span><br>
+                            </div>
+                            <div>
+                                <span class="data-img"><i class="fas fa-lg fa-phone"></i></span><span>Teléfono: <%= user.phone %></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="data-image">
+                        <div class="data-avatar">
+                            <img src="/img/users/cards/datos.png" alt="Imagen avatar">
+                        </div>
+                    </div>
+                </div>
+                <div class="box-button">
+                    <button onclick="openModal()">Cambiar contraseña</button>
+                </div>
+            </div>
+        </div>
+        <div class="dataProfileShipping">
+            <div class="card-container-personal-2">
+                <div class="box-personal-2">
+                    <span class="personal-title-2">Mi dirección de envío</span>
+                </div>
+                <div class="general-personal-box-2">
+                    <div class="card-address">
+                        <div class="data-information-2">
+                            <span class="data-img"></span><span id="addres"><%= user.street %> <%= user.number %> <%= user.floor %> <%= user.flat %></span><br><br>
+                            <span class="data-img"><strong>Referencia: </strong></span><span> entre cortejarena y garcia lorca, porton negro</span><br><br>
+                            <span class="data-img"><i class="fas fa-lg fa-building"></i></span><span>(<%= user.zip %>) <%= user.city %>, <%= zone %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% if (locals.isLogged && locals.userLogged.roll_user_id == 1) { %>
+            <div class="dataUsersMovil">
+                <div class="form-group">
+                    <select 
+                        name="user_select" 
+                        class="form-control selected_user2"
+                    > 
+                        <% for (const oneUser of users) { %>
+                            <option 
+                                value="<%= oneUser.id %>"
+                                <%= (oneUser.id == user.id) ? 'selected' : null %> 
+                            > <%= oneUser.fullName %> </option>
+                        <% } %>
+    
+                    </select>
+                </div>
+            </div>
+            <div class="deleteUsersMovil">
+                <form action="/users/delete/<%= user.id %>?_method=DELETE" method="POST" enctype="multipart/form-data">
+                    <button class="btn-delete-user" type="submit"><i class="fas fa-trash"></i></button>
+                </form>
+            </div>
+        <% } %>
+    </div>
+    <div class="dataHistory">
+        <div class="dataNav">
+            <div class="historial">
+                <h4>Historial</h4>
+            </div>
+        </div>
+        <div class="dataFech">
+            <div class="dateToday">
+                <h4>13 de Octubre de 2021</h4>
+            </div>
+            <div class="dataBar"></div>
+        </div>
+        <div class="dataMessage">
+            <div class="dataLogo">
+                <div>
+                    <i class="fas fa-box"></i>
+                </div>
+            </div>
+            <div class="dataBarMessage"></div>
+            <div class="dataText">
+                <div class="textheader">
+                    <div>
+                        <h4><i class="fas fa-plus" id="acction-text"></i>Se realizó la acción Crear en Producto</h4>
+                    </div>
+                </div>
+                <div class="textBody">
+                    <div>
+                        <h4>Ha realizado una pregunta: Quisiera saber cuanto tiempo tiene de demora la entrega ?. | en el producto: ADUENTUS CABERNET FRANC</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dataMessage" id="dMessage">
+            <div class="dataLogo">
+                <div style="background-color: var(--Yellow);">
+                    <i class="far fa-bell"></i>
+                </div>
+            </div>
+            <div class="dataBarMessage" id="dBarMessage"></div>
+            <div class="dataText">
+                <div class="textheader">
+                    <div>
+                        <h4><i class="far fa-trash-alt" id="acction-text2"></i>Se realizó la acción Borrar en Notificaciones</h4>
+                    </div>
+                </div>
+                <div class="textBody" id="tBody">
+                    <div>
+                        <h4>Eliminaste una notificación.</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dataMessage" id="dMessage2">
+            <div class="dataLogo">
+                <div id="dLogo">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+            <div class="dataBarMessage" id="dMessage3"></div>
+            <div class="dataText">
+                <div class="textheader">
+                    <div>
+                        <h4><i class="far fa-edit" id="acction-text3"></i>Se realizó la acción Editar en Mi perfil</h4>
+                    </div>
+                </div>
+                <div class="textBody" id="tBody2">
+                    <div>
+                        <h4>Ha editado sus datos personales, ha echo los siguientes cambios: su avatar fué cambiado.</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dataFech">
+            <div class="dateToday" id="dToday">
+                <h4>10 de Octubre de 2021</h4>
+            </div>
+            <div class="dataBar"></div>
+        </div>
+        <div class="dataMessage" id="dMessage4">
+            <div class="dataLogo">
+                <div id="dLogo2">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+            <div class="dataBarMessage" id="dBarMessage2"></div>
+            <div class="dataText">
+                <div class="textheader">
+                    <div>
+                        <h4><i class="far fa-edit" id="acction-text4"></i>Se realizó la acción Editar en Mi perfil</h4>
+                    </div>
+                </div>
+                <div class="textBody" id="tBody3">
+                    <div>
+                        <h4>Ha creado una nueva dirección: El Arreo 250</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dataMessage" id="dMessage5">
+            <div class="dataLogo">
+                <div id="dLogo3">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+            <div class="dataBarMessage" id="dBarMessage3"></div>
+            <div class="dataText">
+                <div class="textheader">
+                    <div>
+                        <h4><i class="far fa-edit" id="acction-text5"></i>Se realizó la acción Editar en Mi perfil</h4>
+                    </div>
+                </div>
+                <div class="textBody" id="tBody4">
+                    <div>
+                        <h4>Ha cambiado su contraseña.</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dataMessage" id="dMessage6">
+            <div class="dataLogo">
+                <div id="dLogo4">
+                    <i class="far fa-clock"></i>
+                </div>
+            </div>
+        </div>
+
+
+
+        <% if (locals.isLogged && locals.userLogged.roll_user_id == 1) { %>
+            <div class="dataUsers">
+                <div class="form-group">
+                    <select 
+                        name="user_select" 
+                        class="form-control selected_user"
+                    > 
+                        <% for (const oneUser of users) { %>
+                            <option 
+                                value="<%= oneUser.id %>"
+                                <%= (oneUser.id == user.id) ? 'selected' : null %> 
+                            > <%= oneUser.fullName %> </option>
+                        <% } %>
+    
+                    </select>
+                </div>
+            </div>
+            <div class="deleteUsers">
+                <form action="/users/delete/<%= user.id %>?_method=DELETE" method="POST" enctype="multipart/form-data">
+                    <button class="btn-delete-user" type="submit"><i class="fas fa-trash"></i></button>
+                </form>
+            </div>
+        <% } %>
+
+
+    </div>
+    
+</main>
+
+
+<%- include('../partials/footer') %>
+
+<script src="/js/main.js" type="text/javascript"></script>
+<script src="/js/scrollUp.js"></script>
+<script src="/js/profileUsers.js"></script>
+<script src="/js/modal.js"></script>
+</body>
+</html>

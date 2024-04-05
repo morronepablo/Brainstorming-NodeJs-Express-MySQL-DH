@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include('../partials/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../partials/header.ejs') %>
+
+    <%- include('../partials/scrollUp.ejs') %>
+
+        <form class="form-search" action="/products/search/" method="POST">
+            <% for(category of categories){ %>
+                <% if (category.id == categoryId) { %>
+                    <h1 class="main-title3"><%= category.name %></h1>
+                <% } %> 
+            <% } %> 
+            
+            <div class="span-btn">
+                <input type="text" name="searchProduct" class="search-input" placeholder="BUSCAR">
+                <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        
+        </form>
+        <main class="main-products" style="margin-top: 30px;">
+            <section>
+                <% for(product of products){ %>
+                    <% if (product.category_id == categoryId) { %>
+                        <article class="card-product">
+                            <a href="/products/details/<%= product.id %>" id="card-link">
+                                <img src="/img/products/<%= product.img %>" alt="" />
+                                <h3 class="title-product">
+                                    <%= product.title %>
+                                </h3>
+                                <div class="container-infoProd">
+                                    <% if (product.discount > 0) { %>
+                                        <p class="price-old">$<%= product.price %></p>
+                                    <% } %>
+                                    <p class="price">$<%= (product.price - (product.price * (product.discount * 0.01))).toFixed(2) %></p>
+                                    <div class="icon-bag">
+                                        <p>AGREGAR</p>
+                                        <i class="fas fa-shopping-bag"></i>
+                                    </div>
+                                </div>
+                            </a>
+                            <% if (product.discount > 0) { %>
+                                <div class="discount">
+                                    <span><%= product.discount %>% OFF</span>
+                                    <span>$ <%= (product.price - (product.price * (product.discount * 0.01))).toFixed(2) %></span>
+                                </div>
+                            <% } %>
+                        </article>
+                    <% } %>
+                <% } %>
+            </section>
+        </main>
+
+        <%- include('../partials/footer') %>
+            <script src="/js/main.js"></script>
+            <script src="/js/scrollUp.js"></script>
+</body>
+
+</html>

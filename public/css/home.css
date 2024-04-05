@@ -1,0 +1,131 @@
+#sec-categories {
+  margin-top: 200px;
+}
+
+/* SECCION CATEGORIAS */
+.title-categories {
+  margin: 170px auto 30px;
+  text-align: center;
+  color: var(--beige);
+  letter-spacing: 1.5px;
+}
+.div-categories {
+  text-align: center;
+  margin-top: 40px;
+}
+.img-categories img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  margin-top: 10px;
+  object-fit: cover;
+  box-shadow: 0px 0px 9px 5px rgb(158 158 158 / 78%);
+}
+.subtitle-categories {
+  margin: 30px auto 40px;
+  font-size: 30px;
+  letter-spacing: 1.5px;
+  color: var(--grisMedio);
+}
+/* ANIMACIONES */
+.img-categories img:active {
+  box-shadow: 0px 0px 0px 22px rgb(181 163 125 / 64%);
+  transform: scale(1.1);
+}
+.subtitle-categories:active {
+  color: var(--beige);
+}
+
+.nosotros {
+  height: 700px;
+  position: relative;
+  background: url(../img/wall/traslasierra-cordoba.jpg) center center no-repeat fixed;
+  background-size: cover;
+  margin-bottom: 100px;
+}
+.nosotros:before {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 10px;
+  background: url(../img/wall/style_border_w.png) center center repeat-x;
+  -webkit-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.nosotros .contenedor-parrafo {
+  display: flex;
+  justify-content: center;
+}
+
+.nosotros .contenedor-parrafo img {
+  width: 80%;
+  height: 30%;
+  margin-top: 100px;
+}
+
+.contenedor-parrafo .title-parrafo{
+  text-align: center;
+    font-size: 2.3em;
+    color: var(--blanco);
+    letter-spacing: 4px;
+    font-weight: lighter;
+}
+
+.contenedor-nosotros {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  height: 400px;
+  line-height: 2.5;
+}
+
+.contenedor-nosotros p {
+  color : var(--blanco);
+}
+
+@media (min-width: 768px) {
+  #sec-categories{
+    margin-top: 250px;
+    margin-bottom: 200px;
+  }
+  .div-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 100px;
+  }
+}
+@media (min-width: 1200px) {
+  #sec-categories{
+    margin-top: 250px;
+  }
+      /* ANIMACIONES */
+  .img-categories img:hover {
+    box-shadow: 0px 0px 0px 22px rgb(181 163 125 / 64%);
+    transform: scale(1.1);
+  }
+  .img-categories img{
+    transition: box-shadow 0.5s, transform 0.8s;
+  }
+  .subtitle-categories:hover {
+    color: var(--beige);
+  }
+  .subtitle-categories {
+    transition: color 0.5s;
+  }
+  .nosotros .contenedor-parrafo img {
+    width: 35%;
+  }
+  .contenedor-parrafo .title-parrafo{
+    font-size: 3.3em;
+    font-weight: bold;
+    margin: auto;
+  }
+}

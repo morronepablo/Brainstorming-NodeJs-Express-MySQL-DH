@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/efectosBotones.css">
+    <link rel="stylesheet" href="/css/userValidate.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+</head>
+
+<body>
+    <%- include('../partials/header.ejs') %>
+
+    <%- include('../partials/scrollUp.ejs') %>
+
+    <!-- Contenedor Formulario Registro -->
+    
+    <div class="container-form">
+        <form class="form-register" action="/users/editUser/<%= user.id %>?_method=PUT" method="post" enctype="multipart/form-data" id="form">
+
+            <!-- CONTENEDOR TITULO -->
+            <div class="form-container">
+                <div class="container-title">
+                    <h1>
+                        <i class="fas fa-user-tie" style="margin-right: 10px;"></i> ACTUALIZAR USUARIO
+                    </h1>
+                    <h2>
+                        DATOS PERSONALES
+                    </h2>
+                </div>
+            </div>
+
+            <!-- CONTENEDOR DE CAMPOS REGISTROS -->
+            <div class="field-container">
+
+                <!-- CONTENEDOR GRUPO A -->
+                <div class="fieldA-container">
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Nombre completo" 
+                            name="fullName" 
+                            value="<%= locals.oldData ? oldData.fullName : user.fullName %>"
+                            id="username"
+                        >
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                        <% if (locals.errors && errors.fullName) { %>
+                            <div class="text-danger">
+                                <%= errors.fullName.msg %> 
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            class="form-control numeric" 
+                            placeholder="DNI / CUIT / CUIL" 
+                            name="dni_cuit" 
+                            value="<%= locals.oldData ? oldData.dni_cuit : user.dni_cuit %>"
+                            id="dniCuil"
+                        >
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                        <% if (locals.errors && errors.dni_cuit) { %>
+                            <div class="text-danger">
+                                <%= errors.dni_cuit.msg %> 
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            class="form-control numeric" 
+                            placeholder="Teléfono" 
+                            name="phone" 
+                            value="<%= locals.oldData ? oldData.phone : user.phone %>"
+                            id="numberPhone"
+                        >
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                        <% if (locals.errors && errors.phone) { %>
+                            <div class="text-danger">
+                                <%= errors.phone.msg %> 
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="form-group">
+                        <input 
+                            type="text" class="form-control" 
+                            placeholder="E-Mail" 
+                            name="email" 
+                            value="<%= locals.oldData ? oldData.email : user.email %>"
+                            id="email"
+                        >
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                        <% if (locals.errors && errors.email) { %>
+                            <div class="text-danger">
+                                <%= errors.email.msg %> 
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="form-group">
+                        <select 
+                            name="invoice_type_id" 
+                            class="form-control valid"
+                            id="afip"
+                        > 
+                        <% for (const oneAfip of afip) { %>
+                            <option 
+                                value="<%= oneAfip.id %>"
+                                <%= (oneAfip.id == user.invoice_type_id) ? 'selected' : user.invoice_type_id %> 
+                            > <%= oneAfip.name %> </option>
+                        <% } %>
+                        </select>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small> 
+                        <% if (locals.errors && errors.invoice_type_id) { %>
+                            <div class="text-danger">
+                                <%= errors.invoice_type_id.msg %>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+
+                <!-- CONTENEDOR GRUPO B -->
+                <div class="fieldB-container">
+                    <div class="form-group">
+                        <h4>Datos de entrega</h4>	
+                    </div>
+                    <div class="field-street">
+                        <div class="form-group street">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Calle" 
+                                name="street" 
+                                id="street" 
+                                value="<%= locals.oldData ? oldData.street : user.street %>"
+                            >
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error message</small>
+                            <% if (locals.errors && errors.street) { %>
+                                <div class="text-danger">
+                                    <%= errors.street.msg %> 
+                                </div>
+                            <% } %>
+                        </div>
+                        <div class="form-group numbers">
+                            <input 
+                                type="text" 
+                                class="form-control numeric location" 
+                                placeholder="Nro." 
+                                name="number" 
+                                id="number" 
+                                value="<%= locals.oldData ? oldData.number : user.number %>"
+                            >
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error message</small>
+                            <% if (locals.errors && errors.number) { %>
+                                <div class="text-danger">
+                                    <%= errors.number.msg %> 
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="field-place">
+                        <div class="form-group floor">
+                            <input 
+                                type="text" 
+                                class="form-control numeric" 
+                                placeholder="Piso" 
+                                name="floor" 
+                                value="<%= locals.oldData ? oldData.floor : user.floor %>"
+                            >
+                        </div>
+                        <div class="form-group department">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Depto." 
+                                name="flat" 
+                                value="<%= locals.oldData ? oldData.flat : user.flat %>"
+                            >
+                        </div>
+                        <div class="form-group code">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                placeholder="Código postal" 
+                                name="zip" 
+                                id="zip" 
+                                value="<%= locals.oldData ? oldData.zip : user.zip %>"
+                            >
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error message</small>
+                            <% if (locals.errors && errors.zip) { %>
+                                <div class="text-danger">
+                                    <%= errors.zip.msg %> 
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Localidad" 
+                            name="city" 
+                            id="city" 
+                            value="<%= locals.oldData ? oldData.city : user.city %>"
+                        >
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                        <% if (locals.errors && errors.city) { %>
+                            <div class="text-danger">
+                                <%= errors.city.msg %> 
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="form-group">
+                        <select 
+                            name="state" 
+                            class="form-control" 
+                            id="state"
+                        >   
+                        <% for (const oneCity of zoneDatabase) { %>
+                            <option 
+                                value="<%= oneCity.id %>"
+                                <%= (oneCity.id == user.state_id) ? 'selected' : user.state_id %> 
+                            > <%= oneCity.name %> </option>
+                        <% } %>
+                        </select>
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                        <% if (locals.errors && errors.state) { %>
+                            <div class="text-danger">
+                                <%= errors.state.msg %>
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Referencia" 
+                            name="reference" 
+                            id="reference" 
+                            value="<%= locals.oldData ? oldData.reference : user.reference %>"
+                        >
+                        
+                    </div>
+                    <% if (locals.isLogged && locals.userLogged.roll_user_id == 1) { %>
+                        <div class="form-group">
+                            <select 
+                                name="roll_user" 
+                                class="form-control" 
+                                id="state"
+                            > 
+                            <% for (const oneRoll of rollDatabase) { %>
+                                <option 
+                                    value="<%= oneRoll.id %>"
+                                    <%= oneRoll.id == user.roll_user_id ? 'selected' : null %> 
+                                > <%= oneRoll.roll %> </option>
+                            <% } %>
+                            </select>
+                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <small>Error message</small>
+                            <% if (locals.errors && errors.state) { %>
+                                <div class="text-danger">
+                                    <%= errors.state.msg %>
+                                </div>
+                            <% } %>
+                        </div>
+                    <% } %>
+                    <div class="form-group">
+                        <label><b>Imagen de perfil:</b></label>
+                        <input 
+                            type="file" 
+                            name="avatar"
+                            class="form-control input-image"
+                            value="<%= user.avatar %>"
+                            id="imageFile"
+                        >
+                        <i class="fas fa-check-circle" style="top: 31px;"></i>
+                        <i class="fas fa-exclamation-circle" style="top: 31px;"></i>
+                        <small>Error message</small>
+                        <% if (locals.errors && errors.avatar) { %>
+                            <div class="text-danger">
+                                <%= errors.avatar.msg %>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="line-container">
+            
+            <div class="button-container">
+                <div class="button-register">
+                    <button type="submit" id="register_bot" class="btn-neon">
+                        <span id="span1"></span>
+                        <span id="span2"></span>
+                        <span id="span3"></span>
+                        <span id="span4"></span>
+                        GUARDAR
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!--==================================================
+        FOOTER
+    ===================================================-->
+    <%- include('../partials/footer.ejs') %>
+    
+    <script src="/js/main.js" type="text/javascript"></script>
+    <script src="/js/scrollUp.js"></script>
+    <script src="/js/userEditValidate.js"></script>
+</body>
+</html>

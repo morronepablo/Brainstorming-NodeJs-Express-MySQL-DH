@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('./partials/head.ejs') %> 
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/notFound.css">
+</head>
+<body>
+    <%- include('./partials/header.ejs') %> 
+
+    <%- include('./partials/scrollUp.ejs') %>
+
+    <div class="notfound">
+        <div class="notfound__container">
+            <p class="rocket-error"><i class="fas fa-rocket fa-10x"></i></p>
+            <h1 class="text-error">ERROR 404</h1>
+            <p class="page-error">Página no encontrada</p>
+        </div>
+    </div>
+    
+    <%- include('./partials/footer.ejs') %> 
+    <script src="/js/main.js" type="text/javascript"></script>
+    <script src="/js/scrollUp.js"></script>
+</body>
+</html>
+
+
+
+
